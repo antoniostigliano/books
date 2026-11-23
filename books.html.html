@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>La tua libreria di Natale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FBF4E8;
+    --ink: #221B14;
+    --pine: #1E4036;
+    --pine-deep: #122820;
+    --berry: #8E2A3B;
+    --gold: #B9892F;
+    --card: #FFFDF8;
+    --rule: rgba(34,27,20,0.14);
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --cream: #15110C;
+      --ink: #EFE6D6;
+      --pine: #6FB79A;
+      --pine-deep: #16261F;
+      --berry: #D98094;
+      --gold: #D9B45E;
+      --card: #1C170F;
+      --rule: rgba(239,230,214,0.16);
+    }
+  }
+  :root[data-theme="dark"] {
+    --cream: #15110C;
+    --ink: #EFE6D6;
+    --pine: #6FB79A;
+    --pine-deep: #16261F;
+    --berry: #D98094;
+    --gold: #D9B45E;
+    --card: #1C170F;
+    --rule: rgba(239,230,214,0.16);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Lora', Georgia, serif;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    line-height: 1.55;
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 72px 24px 96px;
+  }
+
+  header.hero { text-align: center; margin-bottom: 64px; }
+  .sprig { font-size: 28px; letter-spacing: 0.3em; color: var(--gold); margin-bottom: 18px; }
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(32px, 6vw, 48px);
+    margin: 0 0 14px;
+    color: var(--pine);
+    line-height: 1.15;
+  }
+  .hero p {
+    max-width: 46ch;
+    margin: 0 auto;
+    color: var(--ink);
+    opacity: 0.8;
+    font-size: 17px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 56px 0 28px;
+  }
+  .section-head h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 26px;
+    color: var(--berry);
+    margin: 0;
+    white-space: nowrap;
+  }
+  .section-head .line { flex: 1; height: 1px; background: var(--rule); }
+  .section-note {
+    margin: -18px 0 28px;
+    font-size: 14.5px;
+    opacity: 0.7;
+    max-width: 52ch;
+  }
+
+  .book {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .book:last-child { border-bottom: 1px solid var(--rule); }
+
+  .spine {
+    position: relative;
+    overflow: hidden;
+    width: 56px;
+    height: 84px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset -4px 0 0 rgba(0,0,0,0.12);
+  }
+  .spine .cover-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+  }
+  .spine .label {
+    position: relative;
+    z-index: 1;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    padding: 6px 0;
+  }
+
+  .book-body h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 19px;
+    margin: 0 0 2px;
+    color: var(--ink);
+  }
+  .book-body .author {
+    font-size: 13.5px;
+    font-style: italic;
+    opacity: 0.65;
+    margin-bottom: 8px;
+  }
+  .book-body p {
+    margin: 0;
+    font-size: 15px;
+    opacity: 0.88;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 72px;
+    font-size: 13.5px;
+    opacity: 0.55;
+    font-family: 'Lora', serif;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="sprig">❃ ❃ ❃</div>
+    <h1>Un libro sotto l'albero</h1>
+    <p>Hai finito Circe — e quindi serviva una lista vera, non un consiglio a caso. Dieci strade nel mito, e otto fuori, per quando ti va di cambiare aria.</p>
+  </header>
+
+  <div class="section-head">
+    <h2>Mito &amp; Grecia</h2>
+    <div class="line"></div>
+  </div>
+  <p class="section-note">Stesse voci silenziate, stessi dèi, nessuna magia fuori posto: solo donne che finalmente raccontano la propria versione.</p>
+
+  <div class="books">
+
+    <div class="book">
+      <div class="spine" style="background:#7A8C5A;"><img class="cover-img" src="covers/ariadne.jpg" alt="" onerror="this.remove()"><span class="label">ARIADNE</span></div>
+      <div class="book-body">
+        <h3>Ariadne</h3>
+        <div class="author">Jennifer Saint</div>
+        <p>Il labirinto di Cnosso e il filo che lo attraversa, raccontati da chi lo ha inventato. Stesso tono lirico e lo stesso sguardo femminile di Circe.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#8E2A3B;"><img class="cover-img" src="covers/elektra.jpg" alt="" onerror="this.remove()"><span class="label">ELEKTRA</span></div>
+      <div class="book-body">
+        <h3>Elektra</h3>
+        <div class="author">Jennifer Saint</div>
+        <p>Tre donne, una maledizione di famiglia, la guerra di Troia sullo sfondo. Più cupo di Ariadne, ma scorre altrettanto bene.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#4A5A6B;"><img class="cover-img" src="covers/stone-blind.jpg" alt="" onerror="this.remove()"><span class="label">STONE BLIND</span></div>
+      <div class="book-body">
+        <h3>Stone Blind</h3>
+        <div class="author">Natalie Haynes</div>
+        <p>Medusa come non l'hai mai letta: ironia tagliente, grande empatia. Tra i migliori "myth retelling" degli ultimi anni.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#B9892F;"><img class="cover-img" src="covers/a-thousand-ships.jpg" alt="" onerror="this.remove()"><span class="label">A THOUSAND SHIPS</span></div>
+      <div class="book-body">
+        <h3>A Thousand Ships</h3>
+        <div class="author">Natalie Haynes</div>
+        <p>Le donne della guerra di Troia, voce corale, ritmo quasi da inchiesta giornalistica più che da epica.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#5C4033;"><img class="cover-img" src="covers/silence-of-the-girls.jpg" alt="" onerror="this.remove()"><span class="label">SILENCE OF THE GIRLS</span></div>
+      <div class="book-body">
+        <h3>The Silence of the Girls</h3>
+        <div class="author">Pat Barker</div>
+        <p>Briseide e la guerra di Troia vista dal campo nemico: più crudo e realistico, meno fiabesco di Miller.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#1E4036;"><img class="cover-img" src="covers/clytemnestra.jpg" alt="" onerror="this.remove()"><span class="label">CLYTEMNESTRA</span></div>
+      <div class="book-body">
+        <h3>Clytemnestra</h3>
+        <div class="author">Costanza Casati</div>
+        <p>Una regina vendicativa, trama quasi da thriller — il libro più "Dan Brown" della lista. Circa 450 pagine, ma si leggono in fretta.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#6B4C7A;"><img class="cover-img" src="covers/daughters-of-sparta.jpg" alt="" onerror="this.remove()"><span class="label">DAUGHTERS OF SPARTA</span></div>
+      <div class="book-body">
+        <h3>Daughters of Sparta</h3>
+        <div class="author">Claire Heywood</div>
+        <p>Elena e Clitemnestra, approccio psicologico e molto realistico: poca magia, molta carne umana.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#2C2C2C;"><img class="cover-img" src="covers/the-penelopiad.jpg" alt="" onerror="this.remove()"><span class="label">THE PENELOPIAD</span></div>
+      <div class="book-body">
+        <h3>The Penelopiad</h3>
+        <div class="author">Margaret Atwood</div>
+        <p>Breve e pungente: Penelope smonta ironicamente il mito di Odisseo. Perfetto per i giorni più pigri delle feste.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#8C3B2E;"><img class="cover-img" src="covers/medea.jpg" alt="" onerror="this.remove()"><span class="label">MEDEA</span></div>
+      <div class="book-body">
+        <h3>Medea</h3>
+        <div class="author">Eilish Quin</div>
+        <p>La maga di Colchide raccontata con empatia, trama drammatica e serrata fino alla fine.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-head">
+    <h2>Fuori dal mito</h2>
+    <div class="line"></div>
+  </div>
+  <p class="section-note">Stessa qualità di scrittura e protagoniste altrettanto forti, ma niente dèi: storia, suspense, vita vera.</p>
+
+  <div class="books">
+
+    <div class="book">
+      <div class="spine" style="background:#2C2C2C;"><img class="cover-img" src="covers/secret-history.jpg" alt="" onerror="this.remove()"><span class="label">SECRET HISTORY</span></div>
+      <div class="book-body">
+        <h3>The Secret History</h3>
+        <div class="author">Donna Tartt</div>
+        <p>Studenti di greco antico ossessionati dai classici, una spirale da thriller psicologico. Il ponte perfetto tra mito e mistero.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#7A8C5A;"><img class="cover-img" src="covers/matrix.jpg" alt="" onerror="this.remove()"><span class="label">MATRIX</span></div>
+      <div class="book-body">
+        <h3>Matrix</h3>
+        <div class="author">Lauren Groff</div>
+        <p>Una badessa medievale costruisce il suo potere in un mondo ostile. Stessa vibrazione "donna che trova la sua voce" di Circe.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#4A5A6B;"><img class="cover-img" src="covers/hamnet.jpg" alt="" onerror="this.remove()"><span class="label">HAMNET</span></div>
+      <div class="book-body">
+        <h3>Hamnet</h3>
+        <div class="author">Maggie O'Farrell</div>
+        <p>Prosa lirica, tragedia familiare, protagonista femminile fortissima: la moglie di Shakespeare, finalmente al centro.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#B9892F;"><img class="cover-img" src="covers/lessons-in-chemistry.jpg" alt="" onerror="this.remove()"><span class="label">LESSONS IN CHEMISTRY</span></div>
+      <div class="book-body">
+        <h3>Lessons in Chemistry</h3>
+        <div class="author">Bonnie Garmus</div>
+        <p>Una chimica brillante contro un mondo sessista negli anni '60. Stesso tema di Circe, tono più ironico e leggero.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#8E2A3B;"><img class="cover-img" src="covers/silent-patient.jpg" alt="" onerror="this.remove()"><span class="label">SILENT PATIENT</span></div>
+      <div class="book-body">
+        <h3>The Silent Patient</h3>
+        <div class="author">Alex Michaelides</div>
+        <p>Thriller psicologico veloce, twist finale spiazzante: se vuole il ritmo da Dan Brown senza un grammo di mito.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#5C4033;"><img class="cover-img" src="covers/paris-apartment.jpg" alt="" onerror="this.remove()"><span class="label">PARIS APARTMENT</span></div>
+      <div class="book-body">
+        <h3>The Paris Apartment</h3>
+        <div class="author">Lucy Foley</div>
+        <p>Mistero serrato, capitoli brevi, colpi di scena ben distribuiti: tiene compagnia per diverse sere senza mai perdere ritmo.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#6B4C7A;"><img class="cover-img" src="covers/daisy-jones.jpg" alt="" onerror="this.remove()"><span class="label">DAISY JONES</span></div>
+      <div class="book-body">
+        <h3>Daisy Jones &amp; The Six</h3>
+        <div class="author">Taylor Jenkins Reid</div>
+        <p>Formato "oral history", voce corale originale e distintiva quanto quella di Circe, ma su una rock band degli anni '70.</p>
+      </div>
+    </div>
+
+    <div class="book">
+      <div class="spine" style="background:#1E4036;"><img class="cover-img" src="covers/four-winds.jpg" alt="" onerror="this.remove()"><span class="label">FOUR WINDS</span></div>
+      <div class="book-body">
+        <h3>The Four Winds</h3>
+        <div class="author">Kristin Hannah</div>
+        <p>Saga familiare storica, molto emotiva, completamente stand-alone: per chi vuole piangere un po' sotto le coperte.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>fatto con cura, per le tue vacanze di Natale 🎄</footer>
+
+</div>
+</body>
+</html>
